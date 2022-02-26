@@ -56,7 +56,6 @@ class GAME:
             for j in range(board.shape[1] - WIN_CONDITION + 1):
                 # if all [WIN_CONDITION=4] tokens equals the first one
                 if board[i][j] != 0 and np.all(board[i][j:j+WIN_CONDITION] == board[i][j]):
-                    print("ROW")
                     return True
         return False
 
@@ -64,7 +63,7 @@ class GAME:
         for i in range(board.shape[0] - WIN_CONDITION + 1):
             for j in range(board.shape[1] - WIN_CONDITION + 1):
                 sub_board = board[i:i+WIN_CONDITION, j:j+WIN_CONDITION]
-                
+
                 curr = sub_board[0][0]
                 if curr != 0 and np.all(np.diag(sub_board) == curr):
                     return True
