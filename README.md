@@ -1,5 +1,12 @@
-# four
-playing with 'Four in a row' for interpretability research
+# Four
+playing with 'Connect-Four' for interpretability research
+
+# step1:
+implementing connect-four interface
+# step2:
+implementing RL Deep Neural Network to learn the game
+# step3:
+implementing the optimal algorithm as discussed here: http://www.informatik.uni-trier.de/~fernau/DSL0607/Masterthesis-Viergewinnt.pdf
 
  ============================ <br>
   1   2   1   1   2   1   2 <br>
