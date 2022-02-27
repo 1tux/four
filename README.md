@@ -4,9 +4,9 @@ playing with 'Connect-Four' for interpretability research
 # step1:
 - [x] implementing connect-four interface
 # step2:
-- [] implementing RL Deep Neural Network to learn the game
+- [ ] implementing RL Deep Neural Network to learn the game
 # step3:
-- [] implementing the optimal algorithm as discussed here: http://www.informatik.uni-trier.de/~fernau/DSL0607/Masterthesis-Viergewinnt.pdf
+- [ ] implementing the optimal algorithm as discussed here: http://www.informatik.uni-trier.de/~fernau/DSL0607/Masterthesis-Viergewinnt.pdf
 
 ```./game.py < tests/full_board.txt```
 
