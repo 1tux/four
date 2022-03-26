@@ -1,4 +1,3 @@
-#!/usr/bin/python3.6
 import numpy as np
 import string
 
@@ -34,6 +33,8 @@ class GAME:
             return -1
 
     def do_turn(self, column):
+        if column in ['X', 'x']:
+            exit(1)
         col_idx = self.column_to_index(column)
         if not (0 <= col_idx < self.width) or not self.is_column_empty(col_idx):
             return INVALID_TURN
