@@ -1,3 +1,14 @@
+# In connect four there are 4,531,985,219,092 possible positions...
+# Therefore it is infeasible to use value/policy iteration to find the optimal policy
+# Instead we will use DQN to approximate them :)
+
+# at first our DQN will train against a random agent to provide the 1st generation agent.
+# then the 2nd generation will be trained against the 1st generation.. and so on.
+# after few steps hopefully our network will be able to master the game
+
+# we can verify its power against the optimal player
+# also, we can hopefully deduce some interesting properties about the game by the DQN latent representations!!!
+
 import numpy as np
 import string
 
