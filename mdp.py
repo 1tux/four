@@ -31,13 +31,14 @@ for s in states:
 def next_state(state, action):
 	if action == 'U':
 		nxt = (state[0] - 1, state[1])
-	if action == 'D':
+	elif action == 'D':
 		nxt = (state[0] + 1, state[1])
-	if action == 'L':
+	elif action == 'L':
 		nxt = (state[0], state[1] - 1)
-	if action == 'R':
+	elif action == 'R':
 		nxt = (state[0], state[1] + 1)
-
+	else:
+		print(f"WTF: {action}")
 	nxt0 = min(max(nxt[0], 0), height-1)
 	nxt1 = min(max(nxt[1], 0), width-1)
 	nxt = (nxt0, nxt1)
@@ -92,10 +93,45 @@ class MDP_solver:
 				print(f"Done after {i} iters: {diff:.3}")
 				break
 
+	def policy_iteration(self, max_iter = 100):
+		for i in range(max_iter):
+			policy_stable = True
+			for s in self.mdp.states:
+				if self.mdp.rewards[s] != 0: continue
+				b = self.policy[s]
+				self.policy[s] = self.mdp.actions[np.argmax([self.mdp.rewards[s] + self.mdp.gamma * self.values[self.mdp.next_state(s, a)] for a in self.mdp.actions])]
+				if b != self.policy[s]:
+					policy_stable = False
+			if policy_stable:
+				print(f"policy_stable after {i} iterations")
+				break
+			else:
+				self.policy_eval()
+
+	def policy_eval(self, max_iter = 100, thresh = 0.05):
+		for i in range(max_iter):
+			delta = 0
+			for s in self.mdp.states:
+				if self.mdp.rewards[s] != 0: continue
+				v = self.values[s]
+				self.values[s] = self.mdp.rewards[s] + self.mdp.gamma * self.values[self.mdp.next_state(s, self.policy[s])]
+				delta = max(delta, np.abs(v-self.values[s]))
+
+			if delta < thresh:
+				break
+
 m = MDP(states, actions, rewards, gamma, next_state)
+import time
+t = time.time()
 s = MDP_solver(m)
 s.value_iteration(100)
-print(s.policy)
+t2 = time.time()
+s = MDP_solver(m)
+s.policy_iteration()
+t3 = time.time()
+print("Value Iteration time:", t2 - t)
+print("Policy Iteration time:", t3 - t2)
+#print(s.policy)
 
 # plot
 board = np.zeros((height, width))
