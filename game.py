@@ -99,7 +99,7 @@ class GAME:
             print(f"  {string.ascii_uppercase[i]}", end=" ")
         print("")
 
-def main():
+def main_PvP():
     g = GAME()
     while True:
         g.plot()
@@ -114,6 +114,32 @@ def main():
         elif res == FULL_BOARD:
             print("It's a tie!")
             break
+
+def main_PvA(agent_move = lambda board: np.random.choice(('A','B','C','D','E','F','G')), agent_turn = 1):
+    # player vs agent
+    g = GAME()
+    while True:
+        g.plot()
+        if agent_turn == g.turn:
+            res = INVALID_TURN
+            while res == INVALID_TURN:
+                col = agent_move(g.board)
+                res = g.do_turn(col)
+        else:    
+            col = input(f"Player{g.turn} turn: ")
+            res = g.do_turn(col)
+        g.plot()
+        if res > 0:
+            print(f"Player {res} WON!")
+            break
+        elif res == INVALID_TURN:
+            print("Invalid Turn!")
+        elif res == FULL_BOARD:
+            print("It's a tie!")
+            break
+
+def main():
+    main_PvA()
 
 if __name__ == "__main__":
     main()
